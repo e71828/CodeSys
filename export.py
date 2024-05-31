@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/bin/env python
 # encoding:utf-8
 # We enable the new python 3 print syntax
 from __future__ import print_function
@@ -179,7 +179,7 @@ def search_folder():
             return selected_path
         else:
             res = system.ui.prompt("'" + selected_path + " ', Not empty. ???  Delete ??? ", PromptChoice.YesNo,
-                                   PromptResult.Yes)
+                                   PromptResult.No)
             if res == PromptResult.Yes:
                 # 非空文件夹 删除多余
                 for f in list_dir:
