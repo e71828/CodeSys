@@ -132,15 +132,16 @@ def print_tree(treeobj, depth, path, verbose=False):
 
     children = treeobj.get_children(False)
 
+    # 根据需要新建文件夹
     if children:
         if type_spec:
             cur_path = os.path.join(cur_path, name + '.' + type_spec)
         else:
             cur_path = os.path.join(cur_path, name)
-        if not os.path.exists(cur_path):
-            os.makedirs(cur_path)
         if name in folder_specify:
             verbose = True
+            if not os.path.exists(cur_path):
+                os.makedirs(cur_path)
         else:
             verbose = False
 
