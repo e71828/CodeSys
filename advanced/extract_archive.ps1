@@ -39,7 +39,7 @@ if ( $extract_to_path ) {
         Exit
     }
 } else {
-    Exit
+    $extract_to_path = $project_path
 }
 
 # 获取当前目录下的所有 .project 文件及其子目录中的 .project 文件
