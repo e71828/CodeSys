@@ -1,0 +1,20 @@
+[
+        {
+                "Name": "Export",
+                "Desc": "Export codesys folder and files",
+                "Icon": "ExtractTo.ico",
+                "Path": "C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\export.py"
+        },
+        {
+                "Name": "Load",
+                "Desc": "Load files from last exported",
+                "Icon": "Add.ico",
+                "Path": "C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\load.py"
+        },
+        {
+                "Name": "Module_Detect",
+                "Desc": "module detection",
+                "Icon": "View.ico",
+                "Path": "C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\advanced\\module_detection.py"
+        }
+]

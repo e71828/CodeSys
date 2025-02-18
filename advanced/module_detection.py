@@ -6,7 +6,9 @@ from __future__ import print_function
 import sys
 import os
 
-from export import declaration_intro, type_dist
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from export import type_dist, declaration_intro
+from extract_archive import naive
 
 folder_specify = ['Auto_hook_control_system', 'anti_swing_contorl', 'super_tower_condition_tele']
 feature_sentence = '	rope_length_theory_standardization_once:REAL;'
@@ -126,31 +128,21 @@ if __name__ == '__main__':
         if not found:
             print("No valid .project files found. Exiting...")
             sys.exit(0)  # 正常退出
-    else:
-        project_path = r'C:\Users\admin\OneDrive\13ANH\Code 实验室\ZAT6000V863_5040_V06.project'
-        valid_projects.append(project_path)  # 存入列表
-        print("Default:", project_path)
     print(len(valid_projects), 'projects found. Please confirm again!')
 
     decision_table = []  #
     for project in valid_projects:
-        filename, file_extension = os.path.splitext(os.path.basename(project))  # 分离文件名和扩展
-        if 'ZAT7000V8_5040D_V03防拆升级' in filename:
-            passwd = 'ZAT7000V863'
-        elif 'Z125_CR720S' in filename:
-            passwd = 'ZAT8000V863'
-        else:
-            passwd = filename.split('_')[0]
+        filename, _ = os.path.splitext(os.path.basename(project))  # 分离文件名和扩展
 
         decision = {'Series': os.path.relpath(project, current_dir), 'Model': filename, 'AutoHook': 0, 'AutoTele': 0,
                     'AntiSwing': 0}
         print("Opening:", '-' * 27)
         print("Opening:", os.path.relpath(project, current_dir))
-        proj = projects.open(project, password=passwd.lower())
+        proj = projects.open(project, password=naive(filename)[0])
         for obj in projects.primary.get_children():
             print_tree(obj, 0, '')
         if proj:
-            print("Opening:", '-' * 27)
+            print("Success!", '-' * 27)
         else:
             print('-' * 27, "Open Failed!  " * 3)
         # close open project if necessary:
@@ -159,10 +151,12 @@ if __name__ == '__main__':
         decision_table.append(decision)
 
     print(len(decision_table), 'decisions detected. Please confirm again!')
-    # 打开 CSV 文件并使用 utf-8 编码
-    with open('decision.csv', 'w') as f:
-        f.write(','.join(decision_table[0].keys()))
-        f.write('\n')
-        for row in decision_table:
-            f.write(','.join(str(x) for x in row.values()).encode('utf-8'))
+
+    if len(sys.argv) > 1:
+        # 打开 CSV 文件并使用 utf-8 编码
+        with open('decision.csv', 'w') as f:
+            f.write(','.join(decision_table[0].keys()))
             f.write('\n')
+            for row in decision_table:
+                f.write(','.join(str(x) for x in row.values()).encode('utf-8'))
+                f.write('\n')
