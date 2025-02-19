@@ -147,7 +147,7 @@ def print_tree(treeobj, depth, path, verbose=False):
 
     if content and verbose:
         save(content, cur_path, name, type_spec)
-        count = count + 1
+        count += 1
 
     for child in children:
         print_tree(child, depth + 1, cur_path, verbose)
@@ -174,8 +174,8 @@ def search_folder():
     # 使用 browse_directory_dialog 函数
     selected_path = browse_directory_dialog("Choose a directory？ 简: 选择保存位置。   ", default_path)
     print("Nice, you choose: '%s'" % selected_path)
-    list_dir = os.listdir(selected_path)
     if selected_path:
+        list_dir = os.listdir(selected_path)
         if not [fd for fd in list_dir if not fd.startswith('.')]:
             return selected_path
         else:
