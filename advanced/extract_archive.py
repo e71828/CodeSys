@@ -73,8 +73,6 @@ if __name__ == '__main__':
                                      encryption_password=naive(filename)[0])
         if proj:
             print("Success!", '-' * 27)
+            proj.close()  # close open project if necessary
         else:
             print('-' * 27, "Open Failed!  " * 3)
-        # close open project if necessary:
-        if projects.primary:
-            projects.primary.close()

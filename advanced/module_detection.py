@@ -139,15 +139,16 @@ if __name__ == '__main__':
         print("Opening:", '-' * 27)
         print("Opening:", os.path.relpath(project, current_dir))
         proj = projects.open(project, password=naive(filename)[0])
-        for obj in projects.primary.get_children():
+        for obj in proj.get_children():
             print_tree(obj, 0, '')
         if proj:
             print("Success!", '-' * 27)
+            proj.close()  # close open project if necessary
         else:
             print('-' * 27, "Open Failed!  " * 3)
-        # close open project if necessary:
-        if projects.primary:
-            projects.primary.close()
+            decision['AutoHook'] = -1
+            decision['AutoTele'] = -1
+            decision['AntiSwing'] = -1
         decision_table.append(decision)
 
     print(len(decision_table), 'decisions detected. Please confirm again!')
