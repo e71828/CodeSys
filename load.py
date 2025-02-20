@@ -266,10 +266,10 @@ def search_folder():
     default_path = os.path.join(root, 'CsysL')
     if not os.path.exists(default_path): default_path = os.path.join(root)
 
-    def browse_directory_dialog(description, selected_path):
+    def browse_directory_dialog(description, root_path):
         dialog = FolderBrowserDialog()
         dialog.Description = description
-        dialog.SelectedPath = selected_path  # 设置默认路径
+        dialog.SelectedPath = root_path  # 设置默认路径
         dialog.ShowNewFolderButton = True
 
         if dialog.ShowDialog() == DialogResult.OK:

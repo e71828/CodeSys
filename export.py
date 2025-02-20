@@ -113,20 +113,20 @@ def print_tree(treeobj, depth, path, verbose=False):
         # projects.primary.export_native(exports,os.path.join(cur_path,name+'.tc'))
     elif treeobj.is_task:
         exports = [treeobj]
-        if verbose: projects.primary.export_native(exports, os.path.join(cur_path, name + '.task'))
+        if verbose: treeobj.export_native(exports, os.path.join(cur_path, name + '.task'))
     elif treeobj.is_libman:
         exports = [treeobj]
-        if verbose: projects.primary.export_native(exports, os.path.join(cur_path, name + '.lib'))
+        if verbose: treeobj.export_native(exports, os.path.join(cur_path, name + '.lib'))
     elif treeobj.is_textlist:
         if verbose:  treeobj.export(os.path.join(cur_path, name + '.tl'))
     else:
         if treeobj.has_textual_declaration:
-            content = content + declaration_intro
+            content += declaration_intro
             a = treeobj.textual_declaration
             content = content + a.text
 
         if treeobj.has_textual_implementation:
-            content = content + implementation_intro
+            content += implementation_intro
             a = treeobj.textual_implementation
             content = content + a.text
 
@@ -160,10 +160,10 @@ def search_folder():
     default_path = os.path.join(root, 'CsysL')
     if not os.path.exists(default_path): default_path = os.path.join(root)
 
-    def browse_directory_dialog(description, selected_path):
+    def browse_directory_dialog(description, root_path):
         dialog = FolderBrowserDialog()
         dialog.Description = description
-        dialog.SelectedPath = selected_path  # 设置默认路径
+        dialog.SelectedPath = root_path  # 设置默认路径
         dialog.ShowNewFolderButton = True
 
         if dialog.ShowDialog() == DialogResult.OK:
