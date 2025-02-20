@@ -39,8 +39,8 @@ if __name__ == '__main__':
         current_dir = sys.argv[1]
         extract_to_path = sys.argv[2]
     else:
-        current_dir = r'D:\智能化技术搭载——程序修改'
-        extract_to_path = r'C:\Users\13ANH\Downloads\emergent\智能化技术搭载——程序修改'
+        current_dir = r''
+        extract_to_path = r''
 
     found = False  # 标志变量
     valid_projects = []  # 用于存储符合条件的文件名的列表
