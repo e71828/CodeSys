@@ -11,100 +11,47 @@ from export import type_dist, declaration_intro
 from extract_archive import naive
 
 folder_specify = ['Auto_hook_control_system', 'anti_swing_contorl', 'super_tower_condition_tele']
-feature_sentence = '	rope_length_theory_standardization_once:REAL;'
+abbr_mapping = {
+    folder_specify[0]: 'AutoHook',
+    folder_specify[1]: 'AntiSwing',
+    folder_specify[2]: 'AutoTele'
+}
+feature_mapping = {
+    folder_specify[0]: '	rope_length_theory_standardization_once:REAL;'
+}
 
 
-def check(text):
-    if decision['AutoHook'] != 0:
-        if feature_sentence in text.encode('utf-8'):
-            print("在内容中发现特征声明语句: '%s'" % feature_sentence)
-            decision['AutoHook'] += 1
-        else:
-            print('已进入文件夹，正在查找')
-
-
-def print_tree(treeobj, depth, path, verbose=False):
-    global count
+def detect():
     global info
 
-    # record current Path
-    cur_path = path
+    # 直接查找文件夹
+    for name_spec in folder_specify:
+        res = [obj for obj in proj.find(name_spec, True) if obj.is_folder]
+        if res:
+            decision[abbr_mapping.get(name_spec)] = 1
 
-    content = ''  # text
-    type_spec = ''  # type
-
-    # get object name
-    name = treeobj.get_name(False)
-    id = treeobj.type.ToString()
-
-    if not folder_specify: verbose = True
-
-    if id in type_dist:
-        type_spec = type_dist[id]
-    else:
-        info[id] = name
-
-    if treeobj.is_device:
-        deviceid = treeobj.get_device_identification()
-        content = 'type=' + str(deviceid.type) + '\nid=' + str(deviceid.id) + '\nver=' + str(deviceid.version)
-    elif treeobj.is_folder:
-        pass
-    elif treeobj.is_task_configuration:
-        pass
-        # exports=[treeobj]
-        # projects.primary.export_native(exports,os.path.join(cur_path,name+'.tc'))
-    elif treeobj.is_task:
-        exports = [treeobj]
-        if verbose: projects.primary.export_native(exports, os.path.join(cur_path, name + '.task'))
-    elif treeobj.is_libman:
-        exports = [treeobj]
-        if verbose: projects.primary.export_native(exports, os.path.join(cur_path, name + '.lib'))
-    elif treeobj.is_textlist:
-        if verbose:  treeobj.export(os.path.join(cur_path, name + '.tl'))
-    else:
-        if treeobj.has_textual_declaration:
-            content = content + declaration_intro
-            a = treeobj.textual_declaration
-            content = content + a.text
-
-        # if treeobj.has_textual_implementation:
-        #     content = content + implementation_intro
-        #     a = treeobj.textual_implementation
-        #     content = content + a.text
-
-    children = treeobj.get_children(False)
-
-    # 根据需要新建文件夹
-    if children:
-        if type_spec:
-            cur_path = os.path.join(cur_path, name + '.' + type_spec)
-        else:
-            cur_path = os.path.join(cur_path, name)
-        if name in folder_specify:
-            verbose = True
-            # if not os.path.exists(cur_path):
-            #     os.makedirs(cur_path)
-            folder_mapping = {
-                folder_specify[0]: 'AutoHook',
-                folder_specify[1]: 'AntiSwing',
-                folder_specify[2]: 'AutoTele'
-            }
-            decision[folder_mapping.get(name)] = 1
-        else:
-            verbose = False
-
-    if content and verbose:
-        check(content)
-        count += 1
-
-    for child in children:
-        print_tree(child, depth + 1, cur_path, verbose)
+        # 找到文件夹还需要找某个特殊文件
+        if decision[abbr_mapping.get(name_spec)] != 0:
+            feature_sentence = feature_mapping.get(name_spec)
+            if feature_sentence:
+                for child in res[0].get_children(True):
+                    guid = child.type.ToString()
+                    if type_dist.get(guid) == 'pou':
+                        text = child.textual_declaration.text
+                        if feature_sentence in text.encode('utf-8'):
+                            print("在内容中发现特征声明语句: '%s'" % feature_sentence)
+                            decision[abbr_mapping.get(name_spec)] += 1
+                            continue
+                        else:
+                            print('已进入文件夹，正在查找')
+                    elif type_dist.get(guid) is None:
+                        info[guid] = child.get_name()
+            else:
+                print('此次检测没有特征语句，正在查找')
 
 
 if __name__ == '__main__':
     info = {}
-    count = 0
-
     print("sys.argv: ", len(sys.argv), " elements:")
     for arg in sys.argv:
         print(" - ", arg)
@@ -139,8 +86,7 @@ if __name__ == '__main__':
         print("Opening:", '-' * 27)
         print("Opening:", os.path.relpath(project, current_dir))
         proj = projects.open(project, password=naive(filename)[0])
-        for obj in proj.get_children():
-            print_tree(obj, 0, '')
+        detect()
         if proj:
             print("Success!", '-' * 27)
             proj.close()  # close open project if necessary
@@ -161,3 +107,5 @@ if __name__ == '__main__':
             for row in decision_table:
                 f.write(','.join(str(x) for x in row.values()).encode('utf-8'))
                 f.write('\n')
+
+    if info: system.write_message(Severity.FatalError, str(info))
