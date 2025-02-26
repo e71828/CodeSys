@@ -17,7 +17,7 @@ abbr_mapping = {
     folder_specify[2]: 'AutoTele'
 }
 feature_mapping = {
-    folder_specify[0]: '	rope_length_theory_standardization_once:REAL;'
+    folder_specify[0]: '	rope_length_theory_standardization_sub:REAL;'
 }
 
 
@@ -97,11 +97,12 @@ if __name__ == '__main__':
             decision_table.append(decision)
 
         print(len(decision_table), 'decisions detected. Please confirm again!')
-    else:
-        decision = {'AutoHook': 0, 'AutoTele': 0, 'AntiSwing': 0}
+    else:        
         proj = projects.primary
-        detect()
-        print(decision)
+        if proj:
+            decision = {'AutoHook': 0, 'AutoTele': 0, 'AntiSwing': 0}
+            detect()
+            print(decision)
 
     if len(sys.argv) > 1:
         # 打开 CSV 文件并使用 utf-8 编码
