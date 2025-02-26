@@ -16,5 +16,11 @@
                 "Desc": "module detection",
                 "Icon": "View.ico",
                 "Path": "C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\advanced\\module_detection.py"
+        },
+        {
+                "Name": "Burn&Login",
+                "Desc": "burn after save as",
+                "Icon": "Wizard.ico",
+                "Path":"C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\advanced\\Burn&Login.py"
         }
 ]
