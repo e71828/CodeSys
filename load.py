@@ -3,6 +3,8 @@
 from __future__ import print_function
 import os
 import shutil
+import sys
+
 import clr
 from System import Environment
 import codecs
@@ -264,7 +266,7 @@ def search_folder():
     root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
     # 目标路径 CsysL
     default_path = os.path.join(root, 'CsysL')
-    if not os.path.exists(default_path): default_path = os.path.join(root)
+    if not os.path.exists(default_path): default_path = root
 
     def browse_directory_dialog(description, root_path):
         dialog = FolderBrowserDialog()
@@ -284,8 +286,11 @@ def search_folder():
 
 
 if __name__ == '__main__':
+    proj = projects.primary
+    if not proj:
+        sys.exit()
     source_folder = search_folder()
     if source_folder:
-        status = walk_folder(projects.primary, source_folder)
+        status = walk_folder(proj, source_folder)
         if status:
             system.ui.info(" Source codes are loaded! ")

@@ -5,6 +5,8 @@ from __future__ import print_function
 
 import os
 import shutil
+import sys
+
 import clr
 from System import Environment
 
@@ -140,10 +142,8 @@ def print_tree(treeobj, depth, path, verbose=False):
             cur_path = os.path.join(cur_path, name)
         if name in folder_specify:
             verbose = True
-            if not os.path.exists(cur_path):
-                os.makedirs(cur_path)
-        else:
-            verbose = False
+        if verbose and not os.path.exists(cur_path):
+            os.makedirs(cur_path)
 
     if content and verbose:
         save(content, cur_path, name, type_spec)
@@ -158,7 +158,7 @@ def search_folder():
     root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
     # 目标路径 CsysL
     default_path = os.path.join(root, 'CsysL')
-    if not os.path.exists(default_path): default_path = os.path.join(root)
+    if not os.path.exists(default_path): default_path = root
 
     def browse_directory_dialog(description, root_path):
         dialog = FolderBrowserDialog()
@@ -202,6 +202,9 @@ def search_folder():
 if __name__ == '__main__':
     info = {}
     count = 0
+    proj = projects.primary
+    if not proj:
+        sys.exit()
     print("--- Saving files in the project: ---")
     print("Now we query a single line string: specified folder name")
     folder_specify = system.ui.query_string("Which folder to export?  简: 指定代码目录？英半角逗号分隔", text='cal_height_hook')
@@ -214,7 +217,7 @@ if __name__ == '__main__':
     save_folder = search_folder()
     # print(save_folder)
     if save_folder:
-        for obj in projects.primary.get_children():
+        for obj in proj.get_children():
             print_tree(obj, 0, save_folder)
         if not folder_specify:
             system.ui.info(' All {} codes are exported! '.format(count))
