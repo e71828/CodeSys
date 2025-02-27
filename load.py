@@ -286,11 +286,11 @@ def search_folder():
 
 
 if __name__ == '__main__':
-    proj = projects.primary
-    if not proj:
+    project = projects.primary
+    if not project:
         sys.exit()
     source_folder = search_folder()
     if source_folder:
-        status = walk_folder(proj, source_folder)
+        status = walk_folder(project, source_folder)
         if status:
             system.ui.info(" Source codes are loaded! ")

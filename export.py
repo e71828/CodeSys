@@ -95,14 +95,14 @@ def print_tree(treeobj, depth, path, verbose=False):
 
     # get object name
     name = treeobj.get_name(False)
-    id = treeobj.type.ToString()
+    guid = treeobj.type.ToString()
 
     if not folder_specify: verbose = True
 
-    if id in type_dist:
-        type_spec = type_dist[id]
+    if guid in type_dist:
+        type_spec = type_dist[guid]
     else:
-        info[id] = name
+        info[guid] = name
 
     if treeobj.is_device:
         deviceid = treeobj.get_device_identification()
