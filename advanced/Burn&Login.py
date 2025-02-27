@@ -10,11 +10,12 @@ from stat import S_IREAD
 if __name__ == '__main__':
     proj = projects.primary
     if proj:
+        proj.save()
         path, name = os.path.split(proj.path)
         if 'Burned-on-' not in name:
             time_str = time.strftime("%Y%m%d-%H%M%S")
             filename = os.path.join(path, 'Burned-on-' + time_str + '.project')
-            proj.save_as(filename, password=None)
+            proj.save_as(filename, password='')
             os.chmod(filename, S_IREAD)
 
         # retrieve active application
