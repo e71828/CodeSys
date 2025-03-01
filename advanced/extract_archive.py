@@ -41,6 +41,7 @@ if __name__ == '__main__':
     else:
         current_dir = r''
         extract_to_path = r''
+        sys.exit()
 
     found = False  # 标志变量
     valid_projects = []  # 用于存储符合条件的文件名的列表
@@ -56,10 +57,10 @@ if __name__ == '__main__':
         # 如果没有找到任何符合条件的 .project 文件，则退出
         if not found:
             print("No valid project files found. Exiting...")
-            sys.exit(0)  # 正常退出
+            system.exit(0)  # 正常退出
     else:
         print("Path error!!")
-        sys.exit(0)
+        system.exit(1)
     print(len(valid_projects), 'projects found. Please confirm again!')
 
     for project in valid_projects:

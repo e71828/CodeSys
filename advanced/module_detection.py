@@ -73,7 +73,7 @@ if __name__ == '__main__':
             # 如果没有找到任何符合条件的 .project 文件，则退出
             if not found:
                 print("No valid .project files found. Exiting...")
-                sys.exit(0)  # 正常退出
+                system.exit(0)  # 正常退出
         print(len(valid_projects), 'projects found. Please confirm again!')
 
         for project in valid_projects:
