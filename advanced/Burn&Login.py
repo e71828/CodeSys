@@ -4,12 +4,19 @@
 from __future__ import print_function
 
 import os
+import sys
 import time
 from stat import S_IREAD
 
 if __name__ == '__main__':
     proj = projects.primary
     if proj:
+        app = proj.active_application
+        app.build()
+        CompileCategory = Guid("{97F48D64-A2A3-4856-B640-75C046E37EA9}")
+        msgs = system.get_message_objects(CompileCategory, Severity.FatalError | Severity.Error)
+        if msgs:
+            sys.exit(1)
         info = proj.get_project_info()
         if not info.author:
             info.author = "e71828"
@@ -33,7 +40,7 @@ if __name__ == '__main__':
             # os.chmod(filename, S_IREAD)  # Can not sync to Onedrive
             if not info.description:
                 info.description = 'Only for recording diff between all versions'
-            # And set the library to released
+            # And set the project to released
             info.released = True
             proj.save()
 
