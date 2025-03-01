@@ -2,6 +2,8 @@
 
 ## 使用方法:
 
+若想在**工具栏使用图标运行**脚本，请参考 [executing_scripts_toolbar](https://content.helpme-codesys.com/en/CODESYS%20Scripting/_cds_executing_scripts_toolbar.html) 和利用相关文件 [`Script Commands`](advanced/Script%20Commands)。
+
 在 CodeSys 软件内执行脚本。
 
 1. 菜单执行
