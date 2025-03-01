@@ -188,12 +188,14 @@ AutoPasswrod()
             MouseMove 251, 201
         }
     }
-    if WinExist("Project Environment ahk_exe CODESYS.exe"){
-        WinClose
-    }
 
     ; 在窗口等待手动 "Encryption Password" 点击确认
     if !WinExist("Encryption Password ahk_exe CODESYS.exe") and is_waiting {
         is_waiting := False ; 重置等待状态
+    }
+
+    ; 关闭弹出的 "Environment" 信息窗口
+    if WinExist("Project Environment ahk_exe CODESYS.exe"){
+        WinClose
     }
 }
