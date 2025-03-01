@@ -2,7 +2,9 @@
 
 ## 使用方法:
 
-若想在**工具栏使用图标运行**脚本，请参考 [executing_scripts_toolbar](https://content.helpme-codesys.com/en/CODESYS%20Scripting/_cds_executing_scripts_toolbar.html) 和利用相关文件 [`Script Commands`](advanced/Script%20Commands)。
+若想在**工具栏使用图标运行**
+脚本，请参考 [executing_scripts_toolbar](https://content.helpme-codesys.com/en/CODESYS%20Scripting/_cds_executing_scripts_toolbar.html)
+和利用相关文件 [`Script Commands`](advanced/Script%20Commands)。
 
 在 CodeSys 软件内执行脚本。
 
@@ -53,14 +55,15 @@
 - [x] 使用该脚本时：当前程序版本信息中的主版本不变、次版本不变、生成号加 `1` 、修订号不变；同时添加作者信息。
 - [x] 使用该脚本时：当前程序另存为 `Burned-on-"%Y%m%d-%H%M%S".project` ，删除程序密码；若当前程序已经是
   `Burned-on-"%Y%m%d-%H%M%S".project` ，则不操作另存为，仅修改版本信息。
-- [x] 使用该脚本后：`Burned-on-"%Y%m%d-%H%M%S".project` 为只读，因为其 `released` 被设置为 `True` 。（文件的只读属性在云同步时会丢失）。
+- [x] 使用该脚本后：`Burned-on-"%Y%m%d-%H%M%S".project` 为只读，因为其 `released` 被设置为 `True`
+  。（因为文件的只读属性在云同步时会丢失，所以通过设置 `released` 保持该文件只读，且可云同步）。
 - [x] 使用该脚本后：`Burned-on-"%Y%m%d-%H%M%S".project` 的 `Description` 设置为
   `Only for recording diff between all versions`。
 - [x] 使用该脚本后：对 `Burned-on-"%Y%m%d-%H%M%S".project` 自动执行烧录，烧录后自动开始 `Run` ，即按下 <kbd>F5</kbd>。
 
 [`Assistive Intelligence/assist_en.ahk`](Assistive%20Intelligence/assist_en.ahk):
 
-- [x] Require: `Codesys` 设置语言为 `English`。
+- [x] Require: `Codesys` 设置语言为 `English` ， 依赖软件 [AutoHotkey v2.0](https://www.autohotkey.com/)。
 - [x] 根据现有规则，自动输入密码，但不点击确认。
 - [x] 打开 project 后，自动关闭 `Environment` 界面。
 - [x] 绑定热键，在 Codesys 中按下 <kbd>=</kbd> 键，输入 <kbd>:=</kbd> 。
@@ -71,8 +74,8 @@
 - [x] 绑定热键，在 Codesys 中连按两下 <kbd>Pause</kbd> 重置提示，从第一步开始。
 - [x] 绑定热键，在 Codesys 中按下 <kbd>`</kbd> 若某一个步有细节步骤，则将细节步骤的关键词送至 <kbd>Ctrl</kbd> + <kbd>
   F</kbd>，自动点击搜索下一个，若没找到则自动关闭弹窗，若找到将返回界面光标处。
-- [x] 绑定热键，在 Codesys 中按下 <kbd>`</kbd> 若某一个步有多个细节步骤，每次按下则将下一个关键词送至 <kbd>Ctrl</kbd> + <kbd>
-  F</kbd>，到最后一个细节步骤时再次按下则循环至第一个关键词。
+- [x] 绑定热键，在 Codesys 中按下 <kbd>`</kbd> 若某一个步有多个细节步骤，每次按下则将下一个关键词送至 <kbd>
+  Ctrl</kbd> + <kbd>F</kbd>，到最后一个细节步骤时再次按下则循环至第一个关键词。
 
 [`advanced/module_detection.py`](advanced/module_detection.py):
 
