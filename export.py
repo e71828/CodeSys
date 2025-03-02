@@ -111,14 +111,13 @@ def print_tree(treeobj, depth, path, verbose=False):
         pass
     elif treeobj.is_task_configuration:
         pass
+        # task_configuration has children, already mkdir
         # exports=[treeobj]
         # projects.primary.export_native(exports,os.path.join(cur_path,name+'.tc'))
     elif treeobj.is_task:
-        exports = [treeobj]
-        if verbose: treeobj.export_native(exports, os.path.join(cur_path, name + '.task'))
+        if verbose: treeobj.export_native(os.path.join(cur_path, name + '.task'))
     elif treeobj.is_libman:
-        exports = [treeobj]
-        if verbose: treeobj.export_native(exports, os.path.join(cur_path, name + '.lib'))
+        if verbose: treeobj.export_native(os.path.join(cur_path, name + '.lib'))
     elif treeobj.is_textlist:
         if verbose:  treeobj.export(os.path.join(cur_path, name + '.tl'))
     else:
