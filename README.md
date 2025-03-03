@@ -64,6 +64,7 @@
 [`Assistive Intelligence/assist_en.ahk`](Assistive%20Intelligence/assist_en.ahk):
 
 - [x] Require: `Codesys` 设置语言为 `English` ， 依赖软件 [AutoHotkey v2.0](https://www.autohotkey.com/)。
+- [x] 另开文件，适配中文窗口 [`Assistive Intelligence/assist_chs.ahk`](Assistive%20Intelligence/assist_chs.ahk):
 - [x] 根据现有规则，自动输入密码，但不点击确认。
 - [x] 打开 project 后，自动关闭 `Environment` 界面。
 - [x] 绑定热键，在 Codesys 中按下 <kbd>=</kbd> 键，输入 <kbd>:=</kbd> 。
