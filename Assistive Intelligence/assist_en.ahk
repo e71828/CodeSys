@@ -79,11 +79,14 @@ search(eye)
         ToolTip
         if WinWaitActive("Find"||"Replace",,500) {
             ControlSetText(eye, "Edit1")
+            KeyWait "Control"
+            Send 'd{BS}'
             Sleep 100 ; Wait a bit for sending chars one by one
             WinGetClientPos &X, &Y, &W, &H
             Click W-100, 30
             Sleep 200 ; Wait a bit for Ctrl+F to be processed by CodeSys
             if WinExist("CODESYS",,project_name) {
+                Sleep 400
                 WinClose ; The specifid text was not found.
             }
             if WinWaitActive("Find"||"Replace") { ; Active the Find window
