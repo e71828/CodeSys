@@ -44,7 +44,7 @@ def insert_text(proj, path, name):
             except:
                 pass
         else:
-            declaration = text.replace(implementation_intro, '')
+            declaration = text.replace(declaration_intro, '')
             proj.textual_declaration.replace(declaration)
 
 
@@ -249,7 +249,8 @@ def walk_folder(proj, path, depth=0):
                         sub_proj = create_dut(proj, sub_path, name)
                     insert_text(sub_proj, sub_path, name)
                 elif f_ext == 'task':
-                    create_task(proj, sub_path, name)
+                    pass
+                    #create_task(proj, sub_path, name)
                 elif f_ext == 'lib':
                     add_library(proj, sub_path, name)
                 elif f_ext == 'tl':
