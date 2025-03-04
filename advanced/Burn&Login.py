@@ -11,6 +11,7 @@ from stat import S_IREAD
 if __name__ == '__main__':
     proj = projects.primary
     if proj:
+        # retrieve active application
         app = proj.active_application
         app.build()
         CompileCategory = Guid("{97F48D64-A2A3-4856-B640-75C046E37EA9}")
@@ -44,12 +45,10 @@ if __name__ == '__main__':
             info.released = True
             proj.save()
 
-        # retrieve active application
-        app = proj.active_application
         # create online application
-        online_app = online.create_online_application(app)
-        # login to device
-        online_app.login(OnlineChangeOption.Try, True)
-        # set status of application to "run", if not in "run"
-        if not online_app.application_state == ApplicationState.run:
-            online_app.start()
+        with online.create_online_application(app) as online_app:
+            # login to device
+            online_app.login(OnlineChangeOption.Try, True)
+            # set status of application to "run", if not in "run"
+            if not online_app.application_state == ApplicationState.run:
+                online_app.start()
