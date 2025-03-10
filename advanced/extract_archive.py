@@ -3,6 +3,7 @@
 # We enable the new python 3 print syntax
 from __future__ import print_function
 
+import codecs
 import sys
 import os
 
@@ -16,6 +17,8 @@ def naive(text, watershed=2000):
         passwd = 'ZAT2500V753E'
     else:
         passwd = text.split('_')[0]
+    if '.' in passwd:
+        passwd = passwd.split('.')[0]
     # 从第4个字符开始（索引为3）查找数字到下一个字母之间的整数
     start_index = 3  # 从第4个字符开始
     # 找到第一个数字部分
@@ -43,6 +46,7 @@ if __name__ == '__main__':
         extract_to_path = r''
         sys.exit()
 
+    decision_table = []
     found = False  # 标志变量
     valid_projects = []  # 用于存储符合条件的文件名的列表
     if os.path.isdir(current_dir):
@@ -68,12 +72,31 @@ if __name__ == '__main__':
         extracted_filepath = os.path.dirname(os.path.join(extract_to_path, os.path.relpath(project, current_dir)))
         if not os.path.exists(extracted_filepath):
             os.makedirs(extracted_filepath)
+        decision = {'Series': os.path.relpath(project, current_dir), 'Model': filename, 'extracted': 0}
         print("Opening:", '-' * 27)
         print("Opening:", os.path.relpath(project, current_dir))
-        proj = projects.open_archive(project, extracted_filepath, overwrite=True,
-                                     encryption_password=naive(filename)[0])
-        if proj:
-            print("Success!", '-' * 27)
-            proj.close()  # close open project if necessary
+        try:
+            proj = projects.open_archive(project, extracted_filepath, overwrite=True,
+                                         encryption_password=naive(filename)[0])
+            if proj:
+                decision['extracted'] = 1
+                print("Success!", '-' * 27)
+                proj.close()  # close open project if necessary
+            decision_table.append(decision)
+        except Exception as e:
+            print('-' * 27, "Failed!  " * 3)
+            decision['Exception'] = str(e)  # 文件打不开或不可写入
+
+    # 打开 CSV 文件并使用 utf-8 编码
+    rows = []
+    header = ['Model', 'extracted', 'Series', 'Exception']
+    for row in decision_table:
+        if row.get('Exception'):
+            row['extracted'] = -1
         else:
-            print('-' * 27, "Open Failed!  " * 3)
+            row['Exception'] = ''
+        rows.append(','.join(str(row.get(k)) for k in header))  # 先缓存数据
+    with codecs.open('decision.csv', 'w', encoding='utf-8') as f:
+        f.write(','.join(header))
+        f.write('\n')
+        f.write('\n'.join(rows) + '\n')
