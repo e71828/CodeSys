@@ -143,6 +143,11 @@ def print_tree(treeobj, depth, path, verbose=False):
             verbose = True
         if verbose and not os.path.exists(cur_path):
             os.makedirs(cur_path)
+    else:
+        if name in folder_specify:
+            verbose = True
+        if verbose and not os.path.exists(cur_path):
+            os.makedirs(cur_path)
 
     if content and verbose:
         save(content, cur_path, name, type_spec)
