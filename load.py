@@ -12,8 +12,8 @@ import codecs
 clr.AddReference('System.Windows.Forms')
 from System.Windows.Forms import FolderBrowserDialog, DialogResult
 
-declaration_intro = '%' + '-' * 75 + '%\r\n%->> Declaration\r\n' + '%' + '-' * 75 + '%\r\n'
-implementation_intro = '%' + '-' * 75 + '%\r\n%->> Implementation\r\n' + '%' + '-' * 75 + '%\r\n'
+declaration_intro = '%' + '-' * 75 + '%\n%->> Declaration\n' + '%' + '-' * 75 + '%\n'
+implementation_intro = '%' + '-' * 75 + '%\n%->> Implementation\n' + '%' + '-' * 75 + '%\n'
 
 
 def check(func):
@@ -32,6 +32,7 @@ def check(func):
 def insert_text(proj, path, name):
     with codecs.open(path, 'r', encoding='utf-8') as f:
         text = f.read()
+        text = "\n".join(text.splitlines())
         index = text.find(implementation_intro)
         if index >= 0:
             implementation = text[index:].replace(implementation_intro, '')

@@ -15,17 +15,18 @@ from extract_archive import naive
 def access_content(path):
     with codecs.open(path, 'r', encoding='utf-8') as f:
         text = f.read()
+        text = "\n".join(text.splitlines()) # replacing "\r\n" or "\r" or with "\n"
         index = text.find(implementation_intro)
+        part1 = None
+        part2 = None
         if index >= 0:
             part2 = text[index:].replace(implementation_intro, '')
             part1 = text[:index].replace(declaration_intro, '')
         else:
             part1 = text.replace(declaration_intro, '')
     file_name, _ = os.path.splitext(os.path.basename(path))  # 分离文件名和扩展
-    if file_name != part1.split(' ')[1]:
-        return (None,) * 3
-    else:
-        return file_name, part1, part2
+    return file_name, part1, part2
+
 
 
 def proof():
@@ -104,7 +105,7 @@ if __name__ == '__main__':
         if proj:
             decision = {'overwrite': 0}
             sel_path = system.ui.open_file_dialog("Choose multiple files:",
-                                                  filter="CodeSys Structured Text files|*.pou;*.m;*.gvl|All files (*.*)|*.*",
+                                                  filter="CodeSys Structured Text files|*.pou;*.m;*.act;*.gvl|All files (*.*)|*.*",
                                                   filter_index=0, multiselect=False)
             pou_name, declaration, implementation = access_content(sel_path)
             if not pou_name:
