@@ -1,3 +1,5 @@
+#Include %A_ScriptDir%\calc_passwd.ahk
+
 #HotIf WinActive("ahk_exe CODESYS.exe")
 =::Send '{U+003A}='
 !=::Send '='
@@ -178,16 +180,7 @@ AutoPasswrod()
         ; 使用正则表达式提取双引号内的内容
         if RegExMatch(text, '"(.*?)"', &match) {
             extracted := match[1]
-            if InStr(extracted, "ZAT7000V8_5040D_V03") {
-                passwd := "ZAT7000V863"
-            } else if InStr(extracted, "Z125_CR720S") {
-                passwd := "ZAT8000V863"
-            } else if InStr(extracted, "ZAT2500V753E_F501") {
-                passwd := "ZAT2500V753E"
-            } else {
-                passwd := SubStr(extracted, 1, InStr(extracted, "_") - 1) ; 获取下划线前的部分
-            }
-            Send(StrLower(passwd))
+            Send(naive(extracted))
             MouseMove 251, 201
         }
     }
