@@ -231,7 +231,7 @@ def walk_folder(proj, path, depth=0):
                     except ValueError:
                         sub_proj = add_prop_method(proj, sub_path, name)
                     insert_text(sub_proj, sub_path, name)
-                elif f_ext == 'm':
+                elif f_ext == 'meth':
                     try:
                         sub_proj = proj.find(name, False)[0]
                     except ValueError:

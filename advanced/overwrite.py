@@ -36,7 +36,7 @@ def proof():
         pou = res[0]
         guid = pou.type.ToString()
         tp = type_dist.get(guid)
-        if tp == 'pou' or tp == 'm':
+        if tp == 'pou' or tp == 'meth':
             pou.textual_implementation.replace(implementation)
             pou.textual_declaration.replace(declaration)
             decision['overwrite'] = 1
