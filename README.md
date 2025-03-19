@@ -47,6 +47,8 @@
 
 - [x] 将上述文件夹内文本代码的导入到当前工程。
 - [ ] 设备文件夹/文件导入。
+- [x] 支持 `pou` 增加的 `Method`支持 `Action` 。
+- [ ] 支持 `pou` 的 `Property` ，支持 `Property Method`。
 
 [`advanced/Burn&Login.py`](advanced/Burn&Login.py):
 
