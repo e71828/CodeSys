@@ -15,15 +15,19 @@ from extract_archive import naive
 def access_content(path):
     with codecs.open(path, 'r', encoding='utf-8') as f:
         text = f.read()
-        text = "\n".join(text.splitlines()) # replacing "\r\n" or "\r" or with "\n"
-        index = text.find(implementation_intro)
+        text = "\n".join(text.splitlines()) + ("\n" if text.endswith("\n") else "") # replacing "\r\n" or "\r" or with "\n"
         part1 = None
         part2 = None
-        if index >= 0:
+        if path.endswith('.act'):
+            part2 = text.replace(implementation_intro, '')
+        elif path.endswith('.gvl'):
+            part1 = text.replace(declaration_intro, '')
+        elif path.endswith('.pou') or path.endswith('.meth'):
+            index = text.find(implementation_intro)
             part2 = text[index:].replace(implementation_intro, '')
             part1 = text[:index].replace(declaration_intro, '')
         else:
-            part1 = text.replace(declaration_intro, '')
+             pass
     file_name, _ = os.path.splitext(os.path.basename(path))  # 分离文件名和扩展
     return file_name, part1, part2
 

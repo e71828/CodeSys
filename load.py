@@ -32,20 +32,16 @@ def check(func):
 def insert_text(proj, path, name):
     with codecs.open(path, 'r', encoding='utf-8') as f:
         text = f.read()
-        text = "\n".join(text.splitlines())
+        text = "\n".join(text.splitlines()) + ("\n" if text.endswith("\n") else "")  # 最后一换行符必须保持一致
         index = text.find(implementation_intro)
-        if index >= 0:
+        if hasattr(proj, 'textual_implementation'):
             implementation = text[index:].replace(implementation_intro, '')
             proj.textual_implementation.replace(implementation)
-            try:
+        if hasattr(proj, 'textual_declaration'):
+            if index >= 0:
                 declaration = text[:index].replace(declaration_intro, '')
-                proj.textual_declaration.replace(declaration)
-            except AttributeError as error:
-                print("AttributeError: {}".format(error))
-            except:
-                pass
-        else:
-            declaration = text.replace(declaration_intro, '')
+            else:
+                declaration = text.replace(declaration_intro, '')
             proj.textual_declaration.replace(declaration)
 
 
