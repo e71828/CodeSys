@@ -15,7 +15,8 @@ from extract_archive import naive
 def access_content(path):
     with codecs.open(path, 'r', encoding='utf-8') as f:
         text = f.read()
-        text = "\n".join(text.splitlines()) + ("\n" if text.endswith("\n") else "") # replacing "\r\n" or "\r" or with "\n"
+        text = "\n".join(text.splitlines()) + (
+            "\n" if text.endswith("\n") else "")  # replacing "\r\n" or "\r" or with "\n"
         part1 = None
         part2 = None
         if path.endswith('.act'):
@@ -27,10 +28,9 @@ def access_content(path):
             part2 = text[index:].replace(implementation_intro, '')
             part1 = text[:index].replace(declaration_intro, '')
         else:
-             pass
+            pass
     file_name, _ = os.path.splitext(os.path.basename(path))  # 分离文件名和扩展
     return file_name, part1, part2
-
 
 
 def proof():
@@ -38,6 +38,16 @@ def proof():
     res = [obj for obj in proj.find(pou_name, True) if not obj.is_folder]
     if res:
         pou = res[0]
+        if len(res) > 1:
+            if system.ui_present:
+                # print("Now, you should choose between following items:")
+                choice = system.ui.choose("Please choose parent of '" + str(res[0].get_name()) + "' to continue ",
+                                          [child.parent.get_name() for child in res])
+                # print("The user selected option '%s'" % str(choice))  # res is a tuple
+                if choice[0] >= 0:
+                    pou = res[choice[0]]
+                else:
+                    sys.exit()
         guid = pou.type.ToString()
         tp = type_dist.get(guid)
         if tp == 'pou' or tp == 'meth':

@@ -94,7 +94,7 @@
 [`advanced/overwrite.py`](advanced/overwrite.py):
 
 - [x] 文件重写，依赖文件夹名或文件内的关键词，同名文件只处理第一个。支持 `Codesys` 中给出结果。
-- [ ] 弹窗询问若有同名文件。
+- [x] 弹窗询问若有同名文件（界面执行时），终端仍然默认只有一个且选第一个。
 - [x] 使用 [`overwrite.ps1`](advanced/overwrite.ps1) ，在终端内批量写入所有子目录工程的同一个文件并输出结果至 `csv` 。
 
 ## 问题:
