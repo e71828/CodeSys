@@ -1,0 +1,24 @@
+<filetype binary="false" default_extension="act" description="Structured Text" name="ST">
+  <highlighting>
+    <options>
+      <option name="LINE_COMMENT" value="//" />
+      <option name="COMMENT_START" value="(*" />
+      <option name="COMMENT_END" value="*)" />
+      <option name="HEX_PREFIX" value="16#" />
+      <option name="NUM_POSTFIXES" value="E,MS" />
+      <option name="HAS_BRACES" value="true" />
+      <option name="HAS_BRACKETS" value="true" />
+      <option name="HAS_PARENS" value="true" />
+    </options>
+    <keywords keywords=":=;by;case;do;else;elsif;end_case;end_for;end_if;end_repeat;end_while;exit;for;if;of;repeat;return;then;to;until;while" ignore_case="true" />
+    <keywords2 keywords="%---;%-&gt;&gt;;---;---%;:;constant;declaration;end_var;function;function_block;implementation;method;persistent;program;retain;super;this;var;var_config;var_external;var_global;var_in_out;var_input;var_inst;var_output;var_stat;var_temp;{;}" />
+    <keywords3 keywords="__uxint;__xint;__xword;array;bit;blink;bool;byte;date;date_and_time;dint;dt;dword;f_trig;int;ldate;ldate_and_time;ldt;lint;lreal;ltime;ltod;lword;pointer to;r_trig;real;reference to;rs;sint;sr;string;t#;time;time_of_day;tod;tof;ton;udint;uint;ulint;usint;word;wstring" />
+    <keywords4 keywords="*;+;-;/;&lt;;&lt;&gt;;=&gt;;&gt;;^;abs;acos;adr;and;asin;at;atan;cal;cos;dword_to_real;exp;expt;int_to_bool;int_to_byte;int_to_uint;limit;ln;log;max;min;mod;not;or;real_to_int;real_to_sint;real_to_time;real_to_udint;real_to_uint;real_to_usint;rhl;rol;ror;sel;shl;sin;sqrt;tan;time_to_real;to_int;to_real;to_uint;trunc;trunc_int;udint_to_real;udint_to_uint;uint_to_bool;uint_to_byte;uint_to_int;uint_to_real;xor" />
+  </highlighting>
+  <extensionMap>
+    <mapping ext="act" />
+    <mapping ext="gvl" />
+    <mapping ext="meth" />
+    <mapping ext="pou" />
+  </extensionMap>
+</filetype>
