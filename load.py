@@ -73,12 +73,14 @@ def create_dev(proj, path, name):
 
 @check
 def create_pou(proj, path, name):
-    proj.create_pou(name, PouType.Program)
+    proj = proj.create_pou(name, PouType.Program)
+    return proj
 
 
 @check
 def create_gvl(proj, path, name):
     proj.create_gvl(name)
+    return proj
 
 
 @check
@@ -146,7 +148,7 @@ def add_prop_method(proj, path, name):
     pass
 
 
-def walk_folder(proj, path, depth=0):
+def walk_folder(proj, path, depth=0, exclude_pou=False):
     if depth == 0:
         if not any(file.endswith('.dev') for file in os.listdir(path)):
             system.ui.warning(" !!! Wrong path !!! ")
@@ -197,17 +199,25 @@ def walk_folder(proj, path, depth=0):
                     except ValueError:
                         sub_proj = create_folder(proj, sub_path, name)
                     walk_folder(sub_proj, sub_path, depth + 1)
+                elif f_ext == 'p':
+                    try:
+                        sub_proj = proj.find(name, False)[0]
+                    except ValueError:
+                        sub_proj = create_pou(proj, sub_path, name)
+                    insert_text(sub_proj, os.path.join(sub_path, name + '.pou'), name)
+                    walk_folder(sub_proj, sub_path, depth + 1, True)
                 else:
                     pass
             else:
                 print('input file: {}{}.{}'.format(' ' * 40, name, f_ext))
                 if f_ext == 'pou':
+                    if exclude_pou: continue
                     try:
                         sub_proj = proj.find(name, False)[0]
                     except ValueError:
                         sub_proj = create_pou(proj, sub_path, name)
                     insert_text(sub_proj, sub_path, name)
-                elif f_ext == 'itf':
+                elif f_ext == 'itf':  # 默认不使用
                     try:
                         sub_proj = proj.find(name, False)[0]
                     except ValueError:
@@ -219,13 +229,13 @@ def walk_folder(proj, path, depth=0):
                     except ValueError:
                         sub_proj = create_gvl(proj, sub_path, name)
                     insert_text(sub_proj, sub_path, name)
-                elif f_ext == 'prop':
+                elif f_ext == 'prop':  # 默认不使用
                     try:
                         sub_proj = proj.find(name, False)[0]
                     except ValueError:
                         sub_proj = create_property(proj, sub_path, name)
                     insert_text(sub_proj, sub_path, name)
-                elif f_ext == 'pm':
+                elif f_ext == 'pm':  # 默认不使用
                     try:
                         sub_proj = proj.find(name, False)[0]
                     except ValueError:
@@ -251,7 +261,7 @@ def walk_folder(proj, path, depth=0):
                     insert_text(sub_proj, sub_path, name)
                 elif f_ext == 'task':
                     pass
-                    #create_task(proj, sub_path, name)
+                    # create_task(proj, sub_path, name) # 有 bug 暂时不创建 task
                 elif f_ext == 'lib':
                     add_library(proj, sub_path, name)
                 elif f_ext == 'tl':

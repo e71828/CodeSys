@@ -135,7 +135,9 @@ def print_tree(treeobj, depth, path, verbose=False):
 
     # 根据需要新建文件夹
     if children:
-        if type_spec:
+        if type_spec == 'pou':
+            cur_path = os.path.join(cur_path, name + '.p')
+        elif type_spec:
             cur_path = os.path.join(cur_path, name + '.' + type_spec)
         else:
             cur_path = os.path.join(cur_path, name)
@@ -227,7 +229,6 @@ if __name__ == '__main__':
             system.ui.info(' All {} codes are exported! '.format(count))
         else:
             system.ui.info(' Specified {} codes are exported! '.format(count))
-
 
         # with open(os.path.join(save_folder, 's.txt'), 'w') as f:
         #     f.write(str(info))
