@@ -91,6 +91,12 @@
 - [x] 不支持 Codesys 中运行。
 - [x] 依赖于 [`extract_archive.ps1`](advanced/extract_archive.ps1) 批量运行。
 
+[`advanced/overwrite.py`](advanced/overwrite.py):
+
+- [x] 文件重写，依赖文件夹名或文件内的关键词，同名文件只处理第一个。支持 `Codesys` 中给出结果。
+- [ ] 弹窗询问若有同名文件。
+- [x] 使用 [`overwrite.ps1`](advanced/overwrite.ps1) ，在终端内批量写入所有子目录工程的同一个文件并输出结果至 `csv` 。
+
 ## 问题:
 
 - 除ST语言的文本外,其他如: Visu,imagePool, VisuConfiguration, Project Settings, Project Infomation 没有导出.
