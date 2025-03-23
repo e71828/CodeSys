@@ -4,6 +4,7 @@
 from __future__ import print_function
 
 import os
+import pickle
 import shutil
 import sys
 
@@ -213,12 +214,21 @@ if __name__ == '__main__':
         sys.exit()
     print("--- Saving files in the project: ---")
     print("Now we query a single line string: specified folder name")
-    folder_specify = system.ui.query_string("Which folder to export?  简: 指定代码目录？英半角逗号分隔", text='cal_height_hook')
-    print("Nice, I get the folder name: %s." % folder_specify)
+    try:
+        with open(os.path.expanduser(os.sep.join(["~", "My Documents", "ST_export.pkl"])), 'rb') as pkl_file:
+            text = pickle.load(pkl_file)
+    except:
+        text = 'cal_height_hook'
+    folder_specify_str = system.ui.query_string("Which folder to export?  简: 指定代码目录？英半角逗号分隔", text=text)
+    print("Nice, I get the folder name: %s." % folder_specify_str)
 
     # 使用 split 分割字符串并去除空格
-    if folder_specify:
-        folder_specify = [part.strip() for part in folder_specify.split(',')]
+    if folder_specify_str:
+        folder_specify = [part.strip() for part in folder_specify_str.split(',')]
+        with open(os.path.expanduser(os.sep.join(["~", "My Documents", "ST_export.pkl"])), 'wb') as pkl_file:
+            pickle.dump(folder_specify_str, pkl_file, -1)
+    else:
+        sys.exit("No specified folder input.")
 
     save_folder = search_folder()
     # print(save_folder)
