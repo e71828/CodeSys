@@ -119,11 +119,12 @@ if __name__ == '__main__':
         if proj:
             decision = {'overwrite': 0}
             sel_path = system.ui.open_file_dialog("Choose multiple files:",
-                                                  filter="CodeSys Structured Text files|*.pou;*.m;*.act;*.gvl|All files (*.*)|*.*",
+                                                  filter="CodeSys Structured Text files|*.pou;*.meth;*.act;*.gvl|All "
+                                                         "files (*.*)|*.*",
                                                   filter_index=0, multiselect=False)
-            pou_name, declaration, implementation = access_content(sel_path)
-            if not pou_name:
+            if not sel_path:
                 sys.exit(1)
+            pou_name, declaration, implementation = access_content(sel_path)
             proof()
     if len(sys.argv) > 2:
         rows = []
