@@ -1,9 +1,7 @@
 ﻿# 定义常量变量
 $codesysExePath = "C:\Program Files\CODESYS 3.5.16.30\CODESYS\Common\CODESYS.exe"
 $codesysProfile = "CODESYS V3.5 SP16 Patch 3"
-$OneDrivePath = $env:OneDrive  # 个人版 OneDrive
-$scriptPath = "$OneDrivePath\13ANH\PycharmProjects\CodeSys\advanced\extract_archive.py"
-$currentPath = "$PSScriptRoot"
+$scriptPath = "$PSScriptRoot\extract_archive.py"
 $project_path = Read-Host "Enter the directory containing .projectarchive files"
 # 去掉输入字符串两侧的引号
 $project_path = $project_path.Trim('"')
