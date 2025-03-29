@@ -108,10 +108,11 @@ if __name__ == '__main__':
                     print("Success!", '-' * 27)
                     proj.save()
                     proj.close()  # close open project if necessary
-                decision_table.append(decision)
             except Exception as e:
                 decision['Exception'] = str(e)  # 文件打不开或不可写入
                 print('-' * 27, "Failed!  " * 3)
+            finally:
+                decision_table.append(decision)
 
         print(len(decision_table), 'decisions detected. Please confirm again!')
     else:

@@ -82,10 +82,11 @@ if __name__ == '__main__':
                 decision['extracted'] = 1
                 print("Success!", '-' * 27)
                 proj.close()  # close open project if necessary
-            decision_table.append(decision)
         except Exception as e:
             print('-' * 27, "Failed!  " * 3)
             decision['Exception'] = str(e)  # 文件打不开或不可写入
+        finally:
+            decision_table.append(decision)
 
     # 打开 CSV 文件并使用 utf-8 编码
     rows = []
