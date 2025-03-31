@@ -45,7 +45,7 @@ if __name__ == '__main__':
     print(len(valid_projects), 'projects found. Please confirm again!')
 
     try:
-        with open(os.path.expanduser(os.sep.join(["~", "My Documents", "project_checksum.pkl"])), 'r') as pkl_file:
+        with open(os.path.expanduser(os.sep.join(["~", "My Documents", "project_checksum.pkl"])), 'rb') as pkl_file:
             checksum_file = pickle.load(pkl_file)
     except:
         checksum_file = {}
@@ -80,5 +80,5 @@ if __name__ == '__main__':
             decision_table.append(decision)
     print(len(decision_table), 'decisions detected. Please confirm again!')
 
-with open(os.path.expanduser(os.sep.join(["~", "My Documents", "project_checksum.pkl"])), 'w') as pkl_file:
+with open(os.path.expanduser(os.sep.join(["~", "My Documents", "project_checksum.pkl"])), 'wb') as pkl_file:
     pickle.dump(checksum_file, pkl_file, -1)
