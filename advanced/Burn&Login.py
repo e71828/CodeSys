@@ -18,22 +18,30 @@ if __name__ == '__main__':
         msgs = system.get_message_objects(CompileCategory, Severity.FatalError | Severity.Error)
         if msgs:
             sys.exit(1)
+        path, name = os.path.split(proj.path)
         info = proj.get_project_info()
         if not info.author:
             info.author = "e71828"
         current_version = info.version  # 类似于 .NET 中的 System.Version，其属性通常不可直接修改，
         if current_version:
-            new_version = (
-                current_version.Major,
-                current_version.Minor,
-                current_version.Build + 1,
-                current_version.Revision
-            )
+            if 'Burned-on-' not in name:
+                new_version = (
+                    current_version.Major,
+                    current_version.Minor,
+                    current_version.Build + 1,
+                    current_version.Revision
+                )
+            else:
+                new_version = (
+                    current_version.Major,
+                    current_version.Minor,
+                    current_version.Build,
+                    current_version.Revision + 1
+                )
         else:
             new_version = (0, 1, 0, 0)
         info.version = new_version  # 更新
         proj.save()
-        path, name = os.path.split(proj.path)
         if 'Burned-on-' not in name:
             time_str = time.strftime("%Y%m%d-%H%M%S")
             filename = os.path.join(path, 'Burned-on-' + time_str + '.project')
