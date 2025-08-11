@@ -1,3 +1,5 @@
+#Include %A_ScriptDir%\calc_passwd.ahk
+
 #HotIf WinActive("ahk_exe CODESYS.exe")
 =::Send '{U+003A}='
 !=::Send '='
@@ -135,7 +137,9 @@ steps :=
     "吊载 zero_check",
     "吊载 real2uint 不可一步完成",
     "吊载调用复制，接口输入常量修改",
-    "吊载平移 derrick_sub 修改，两个 network",
+    "吊载平移 derrick_sub 修改，两或3个 network",
+    "吊载平移 winch_i_sub 修改，3个 network",
+    "吊载平移 pump_sub 修改，1个 network",
 ;    "吊载平移输入检查未定义", ; 一般都在 GVL 中，很可能重复定义
     "吊载平移输入检查未写入", ; 展开多个
     "吊载平移检查重复写入",
