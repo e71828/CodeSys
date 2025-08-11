@@ -12,14 +12,21 @@ AutoPasswrod()
     if WinExist("Encryption Password ahk_exe CODESYS.exe") and !is_waiting {
         is_waiting := True
         WinWaitActive("Encryption Password")
-        MouseMove 150, 29
         text := ControlGetText("Enter the password")
 
         ; 使用正则表达式提zat6000v863取引号内的内容
         if RegExMatch(text, "'(.*?)'", &match) {
             extracted := match[1]
             Send(naive(extracted))
-            MouseMove 251, 201
+
+            ; 获取 OK 按钮
+            Sleep 500
+            ControlFocus "Cancel"
+            ControlGetPos &x, &y, &w, &h, "OK"
+            x := x + w *4 // 5
+            y := y + h // 2
+            ; 移动鼠标到按钮中心
+            MouseMove x, y
         }
     }
 

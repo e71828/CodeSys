@@ -12,14 +12,21 @@ AutoPasswrod()
     if WinExist("密码 ahk_exe CODESYS.exe") and !is_waiting {
         is_waiting := True
         WinWaitActive("密码")
-        MouseMove 150, 29
         text := ControlGetText("输入") ; 输入"ZAT4000VS863-1_5040_V01_d"的密码:
 
         ; 使用正则表达式提取双引号内的内容
         if RegExMatch(text, '"(.*?)"', &match) {
             extracted := match[1]
             Send(naive(extracted))
-            MouseMove 251, 201
+
+            ; 获取 OK 按钮
+            Sleep 500
+            ControlFocus "取消"
+            ControlGetPos &x, &y, &w, &h, "确定"
+            x := x + w *4 // 5
+            y := y + h // 2
+            ; 移动鼠标到按钮中心
+            MouseMove x, y
         }
     }
 
