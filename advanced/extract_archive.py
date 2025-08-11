@@ -4,17 +4,15 @@
 from __future__ import print_function
 
 import codecs
-import sys
 import os
+import sys
 
 
 def naive(text, watershed=2000):
-    if 'ZAT7000V8_5040D_V03防拆升级' in text:
+    if 'ZAT7000V8_5040D' in text:
         passwd = 'ZAT7000V863'
     elif 'Z125_CR720S' in text:
         passwd = 'ZAT8000V863'
-    elif 'ZAT2500V753E_F501' in text:
-        passwd = 'ZAT2500V753E'
     else:
         passwd = text.split('_')[0]
     if '.' in passwd:
