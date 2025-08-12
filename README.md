@@ -97,6 +97,9 @@
 - [x] 弹窗询问若有同名文件（界面执行时），终端仍然默认只有一个且选第一个。
 - [x] 使用 [`overwrite.ps1`](advanced/overwrite.ps1) ，在终端内批量写入所有子目录工程的同一个文件并输出结果至 `csv` 。
 
+云同步：
+- `push`: `rsync -avc --exclude='.*' --exclude='__pycache__/' --exclude='venv/' ./ ~/OneDrive/13ANH/PycharmProjects/CodeSys`
+- `pull`: `rsync -avc --exclude='.*' --exclude='__pycache__/' --exclude='venv/' ~/OneDrive/13ANH/PycharmProjects/CodeSys ./`
 ## 问题:
 
 - 除ST语言的文本外,其他如: Visu,imagePool, VisuConfiguration, Project Settings, Project Infomation 没有导出.
