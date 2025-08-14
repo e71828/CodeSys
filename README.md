@@ -98,8 +98,18 @@
 - [x] 使用 [`overwrite.ps1`](advanced/overwrite.ps1) ，在终端内批量写入所有子目录工程的同一个文件并输出结果至 `csv` 。
 
 云同步：
-- `push`: `rsync -avc --exclude='.*' --exclude='__pycache__/' --exclude='venv/' ./ ~/OneDrive/13ANH/PycharmProjects/CodeSys`
-- `pull`: `rsync -avc --exclude='.*' --exclude='__pycache__/' --exclude='venv/' ~/OneDrive/13ANH/PycharmProjects/CodeSys ./`
+- `push`: `rsync -avc --exclude='.*' --exclude='__pycache__/' --exclude='venv/' --exclude='程序-e71828/' ./ ~/OneDrive/13ANH/PycharmProjects/CodeSys/`
+- `pull`: `rsync -avc --exclude='.*' --exclude='__pycache__/' --exclude='程序分发-Force/' --exclude='Clean-Folder.ps1' --exclude='.stignore' --exclude='venv/' ~/OneDrive/13ANH/PycharmProjects/CodeSys/ ./`
+
+syncthing 同步：
+- `.stignore`:
+```
+(?d)*.opt
+(?d)*.compileinfo
+(?d)*.bootinfo_guids
+(?d)*.bootinfo
+(?d)*.~u
+```
 ## 问题:
 
 - 除ST语言的文本外,其他如: Visu,imagePool, VisuConfiguration, Project Settings, Project Infomation 没有导出.
