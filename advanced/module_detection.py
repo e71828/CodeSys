@@ -12,13 +12,16 @@ from export import type_dist, declaration_intro
 from extract_archive import naive
 
 folder_specify = ['Auto_hook_control_system', 'anti_swing_contorl', 'super_tower_condition_tele']
+pou_specify = ['CAN1_Pack_Unpack']
 abbr_mapping = {
     folder_specify[0]: 'AutoHook',
     folder_specify[1]: 'AntiSwing',
-    folder_specify[2]: 'AutoTele'
+    folder_specify[2]: 'AutoTele',
+    pou_specify[0]: 'zhitui'
 }
 feature_mapping = {
-    folder_specify[0]: '	rope_length_theory_standardization_sub:REAL;'
+    folder_specify[0]: '	rope_length_theory_standardization_sub:REAL;',
+    pou_specify[0]: 'IF NOT (limiter_assemble_mode_enable AND peizhong=0) THEN'
 }
 
 
@@ -47,6 +50,29 @@ def detect():
                             print('已进入文件夹，正在查找')
                     elif type_dist.get(guid) is None:
                         info[guid] = child.get_name()
+            else:
+                print('此次检测没有特征语句，正在查找')
+
+    # 直接查找POU
+    for name_spec in pou_specify:
+        res = [obj for obj in proj.find(name_spec, True) if not obj.is_folder]
+        if res:
+            decision[abbr_mapping.get(name_spec)] = 1
+
+        # 找到文件夹还需要找某个特殊文件
+        if decision[abbr_mapping.get(name_spec)] != 0:
+            feature_sentence = feature_mapping.get(name_spec)
+            if feature_sentence:
+                guid = res[0].type.ToString()
+                if type_dist.get(guid) == 'pou':
+                    text = res[0].textual_implementation.text
+                    if feature_sentence in text.encode('utf-8'):
+                        print("在内容中发现特征实现语句: '%s'" % feature_sentence)
+                        decision[abbr_mapping.get(name_spec)] += 1
+                    else:
+                        print('已进入文件夹，正在查找')
+                elif type_dist.get(guid) is None:
+                    info[guid] = res[0].get_name()
             else:
                 print('此次检测没有特征语句，正在查找')
 
@@ -82,7 +108,8 @@ if __name__ == '__main__':
 
             decision = {'Series': os.path.relpath(project, current_dir), 'Model': filename, 'AutoHook': 0,
                         'AutoTele': 0,
-                        'AntiSwing': 0}
+                        'AntiSwing': 0,
+                        'zhitui':0}
             print("Opening:", '-' * 27)
             print("Opening:", os.path.relpath(project, current_dir))
             try:
@@ -102,7 +129,7 @@ if __name__ == '__main__':
     else:
         proj = projects.primary
         if proj:
-            decision = {'AutoHook': 0, 'AutoTele': 0, 'AntiSwing': 0}
+            decision = {'AutoHook': 0, 'AutoTele': 0, 'AntiSwing': 0,'zhitui':0}
             detect()
             print(decision)
 
