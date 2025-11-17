@@ -40,3 +40,4 @@ AutoPasswrod()
         WinClose
     }
 }
+#HotIf
