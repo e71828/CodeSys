@@ -109,6 +109,7 @@ syncthing 同步：
 (?d)*.bootinfo_guids
 (?d)*.bootinfo
 (?d)*.~u
+(?d)*.precompilecache
 ```
 ## 问题:
 
