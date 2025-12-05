@@ -21,7 +21,8 @@ if __name__ == '__main__':
         path, name = os.path.split(proj.path)
         info = proj.get_project_info()
         if not info.author:
-            info.author = "e71828"
+            # info.author = "e71828"
+            pass
         current_version = info.version  # 类似于 .NET 中的 System.Version，其属性通常不可直接修改，
         if current_version:
             if 'Burned-on-' not in name:
@@ -40,7 +41,7 @@ if __name__ == '__main__':
                 )
         else:
             new_version = (0, 1, 0, 0)
-        info.version = new_version  # 更新
+        # info.version = new_version  # 更新
         proj.save()
         if 'Burned-on-' not in name:
             time_str = time.strftime("%Y%m%d-%H%M%S")
@@ -48,7 +49,8 @@ if __name__ == '__main__':
             proj.save_as(filename, password='')
             # os.chmod(filename, S_IREAD)  # Can not sync to Onedrive
             if not info.description:
-                info.description = 'Only for recording diff between all versions'
+                # info.description = 'Only for recording diff between all versions'
+                pass
             # And set the project to released
             info.released = True
             proj.save()
