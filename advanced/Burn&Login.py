@@ -50,8 +50,8 @@ if __name__ == '__main__':
             os.chmod(filename, S_IREAD)  # Can not sync to Onedrive
             if not info.description:
                 # info.description = 'Only for recording diff between all versions'
+                # proj.save()
                 pass
-            proj.save()
 
         # create online application
         with online.create_online_application(app) as online_app:
