@@ -15,9 +15,11 @@ lock_codesys_projects()
     }
     
     
-    SelectedFolder := A_Desktop "\Codesys"   
+    SelectedFolder := A_Desktop "\Codesys"
     if !(FileExist(SelectedFolder) ~= "[D]"){
         SelectedFolder := DirSelect("::{60632754-C523-4B62-B45C-4172DA012619}", 0)  ; User Accounts.
+        if SelectedFolder = ""
+            return
     }
     count := 0
     Loop Files, SelectedFolder "\*.project", "R"
