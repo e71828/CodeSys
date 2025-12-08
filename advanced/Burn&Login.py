@@ -47,12 +47,10 @@ if __name__ == '__main__':
             time_str = time.strftime("%Y%m%d-%H%M%S")
             filename = os.path.join(path, 'Burned-on-' + time_str + '.project')
             proj.save_as(filename, password='')
-            # os.chmod(filename, S_IREAD)  # Can not sync to Onedrive
+            os.chmod(filename, S_IREAD)  # Can not sync to Onedrive
             if not info.description:
                 # info.description = 'Only for recording diff between all versions'
                 pass
-            # And set the project to released
-            info.released = True
             proj.save()
 
         # create online application
