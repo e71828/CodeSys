@@ -23,9 +23,9 @@ lock_codesys_projects()
     Loop Files, SelectedFolder "\*.project", "R"
     {
         LongPath := A_LoopFilePath
-        if InStr(A_LoopFileDir, "\old")
-            continue
-        if InStr(A_LoopFileDir, "\.stversions")
+        if (InStr(A_LoopFileDir, "\old")
+            || InStr(A_LoopFileDir, "\.stversions")
+            || InStr(A_LoopFileDir, "\.git"))
             continue
         if A_LoopFileAttrib ~= "[HRS]"  ; 跳过任何具有 H(隐藏), R(只读) 或 S(系统). 请参阅 ~= 运算符.
             continue  ; 跳过这个文件并继续下一个文件.
