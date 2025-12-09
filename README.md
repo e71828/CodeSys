@@ -104,12 +104,8 @@
 syncthing 同步：
 - `.stignore`:
 ```
-(?d)*.opt
-(?d)*.compileinfo
-(?d)*.bootinfo_guids
-(?d)*.bootinfo
-(?d)*.~u
-(?d)*.precompilecache
+// 肯定规则，过滤 codesys 辅助文件
+#include codesys-patterns.txt
 ```
 ## 问题:
 
