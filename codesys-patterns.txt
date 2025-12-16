@@ -4,3 +4,5 @@
 (?d)*.bootinfo
 (?d)*.~u
 (?d)*.precompilecache
+
+~$*  // exclude all Office tmp files
