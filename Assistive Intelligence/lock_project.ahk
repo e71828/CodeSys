@@ -15,7 +15,7 @@ lock_codesys_projects()
     }
     
     
-    SelectedFolder := A_Desktop "\Codesys"
+    SelectedFolder := A_Desktop "\程序-e71828"
     if !(FileExist(SelectedFolder) ~= "[D]"){
         SelectedFolder := DirSelect("::{60632754-C523-4B62-B45C-4172DA012619}", 0)  ; User Accounts.
         if SelectedFolder = ""
@@ -26,6 +26,7 @@ lock_codesys_projects()
     {
         LongPath := A_LoopFilePath
         if (InStr(A_LoopFileDir, "\old")
+            || InStr(A_LoopFileDir, "\shared-")
             || InStr(A_LoopFileDir, "\.stversions")
             || InStr(A_LoopFileDir, "\.git"))
             continue
