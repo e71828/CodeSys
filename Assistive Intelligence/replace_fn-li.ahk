@@ -1,6 +1,6 @@
 ;SC163::Ctrl ;Fn按键替换Ctrl，但问题在于Fn键的硬件优先级极高，Fn的组合键响应一定会响应，若没有对应响应才则给出Ctrl的响应。
 ;KeyHistory
-; 把 SC163 163 Ctrl 键使用
+; 把 SC163 当作 Ctrl 键使用
 SC163 & a::Send "{Ctrl down}a{Ctrl up}"
 SC163 & b::Send "{Ctrl down}b{Ctrl up}"
 SC163 & c::Send "{Ctrl down}c{Ctrl up}"
