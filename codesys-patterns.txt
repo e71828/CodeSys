@@ -5,4 +5,5 @@
 (?d)*.~u
 (?d)*.precompilecache
 
-~$*  // exclude all Office tmp files
+// exclude all Office tmp files
+~$*  
