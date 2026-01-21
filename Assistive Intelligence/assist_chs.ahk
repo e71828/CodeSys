@@ -3,7 +3,7 @@
 #HotIf WinActive("ahk_exe CODESYS.exe")
 =::Send '{U+003A}='
 !=::Send '='
-
+#HotIf
 SetTimer AutoPasswrod, 500
 AutoPasswrod()
 {
@@ -21,7 +21,7 @@ AutoPasswrod()
 
             ; 获取 OK 按钮
             Sleep 500
-            ControlFocus "取消"
+            ;ControlFocus "取消"
             ControlGetPos &x, &y, &w, &h, "确定"
             x := x + w *4 // 5
             y := y + h // 2
