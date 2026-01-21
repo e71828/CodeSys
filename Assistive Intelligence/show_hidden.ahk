@@ -1,7 +1,7 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-#HotIf WinActive("ahk_class CabinetWClass")
+#HotIf WinActive("ahk_class CabinetWClass") || WinActive("ahk_class #32770")
 ^h::{
     KeyWait "Control" ; 等待按键释放，避免系统当作按下了两次 Ctrl，从而触发 Listary。
     
