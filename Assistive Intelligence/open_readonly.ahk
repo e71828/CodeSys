@@ -45,7 +45,8 @@ TryTriggerDropDown(keyboard := false) {
     try {
         MouseGetPos &mX, &mY
         ; 检查 Edit1 是否有内容
-        if (ControlGetText("Edit1", "A") != "") {
+        text := ControlGetText("Edit1", "A")
+        if (text != "" && !RegExMatch(text, "i)\.projectarchive$")) {
             ; 获取 Button1 的位置信息
             ControlGetPos &bx, &by, &bw, &bh, "Button1", "A"
 
