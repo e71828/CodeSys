@@ -20,7 +20,7 @@ $LButton:: {
             ; 排除背景色 (191919 和 FFFFFF)
             ; 注意：PixelGetColor 返回的是十六进制字符串，如 "0x191919"
             if (currColor != "0x191919" && currColor != "0xFFFFFF") {
-                TryTriggerDropDown(false)
+                TryTriggerDropDown(false, true)
                 return
             }
         }
@@ -41,7 +41,7 @@ $NumpadEnter:: {
 #HotIf
 
 ; --- 核心跳转逻辑函数 ---
-TryTriggerDropDown(keyboard := false) {
+TryTriggerDropDown(keyboard := false, double_click := false) {
     try {
         MouseGetPos &mX, &mY
         ; 检查 Edit1 是否有内容
@@ -76,8 +76,10 @@ TryTriggerDropDown(keyboard := false) {
                     return -1
             }
         } else {
-            if !keyboard
+            if !keyboard and double_click
                 Click 2
+            else if !keyboard and !double_click
+                Click
             else
                 Send "{Enter}"
         }
