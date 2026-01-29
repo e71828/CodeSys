@@ -13,7 +13,7 @@ $LButton:: {
             return
     }
     if (InStr(mCtrl, "DirectUIHWND")) {
-        if (A_TickCount - lastLButtonUpTime < 400) {
+        if (A_TickCount - lastLButtonUpTime < 127) {
             ; 获取鼠标当前位置的颜色
             ; 默认返回的是 BGR 格式，例如 0x191919
             currColor := PixelGetColor(mX, mY)
