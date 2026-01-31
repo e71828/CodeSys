@@ -12,7 +12,11 @@ AutoPasswrod()
     if WinExist("密码 ahk_exe CODESYS.exe") and !is_waiting {
         is_waiting := True
         WinWaitActive("密码")
-        text := ControlGetText("输入") ; 输入"ZAT4000VS863-1_5040_V01_d"的密码:
+        ; 使用单行 try，不改变后续逻辑的缩进
+        try text := ControlGetText("输入") ; 输入"ZAT4000VS863-1_5040_V01_d"的密码:
+        catch {
+            text := ""
+        }
 
         ; 使用正则表达式提取双引号内的内容
         if RegExMatch(text, '"(.*?)"', &match) {

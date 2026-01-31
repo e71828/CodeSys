@@ -12,7 +12,11 @@ AutoPasswrod()
     if WinExist("Encryption Password ahk_exe CODESYS.exe") and !is_waiting {
         is_waiting := True
         WinWaitActive("Encryption Password")
-        text := ControlGetText("Enter the password")
+        ; 使用单行 try，不改变后续逻辑的缩进
+        try text := ControlGetText("Enter the password")
+        catch {
+            text := ""
+        }
 
         ; 使用正则表达式提zat6000v863取引号内的内容
         if RegExMatch(text, "'(.*?)'", &match) {
