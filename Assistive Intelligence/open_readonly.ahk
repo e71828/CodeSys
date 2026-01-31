@@ -1,12 +1,11 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-lastLButtonUpTime := 0
 #HotIf WinActive("Open Project ahk_class #32770 ahk_exe CODESYS.exe") || WinActive("打开工程 ahk_class #32770 ahk_exe CODESYS.exe")
 
 ; 1. 拦截 Button1 的鼠标点击
 $LButton:: {
-    global lastLButtonUpTime
+    static lastLButtonUpTime := 0
     MouseGetPos &mX, &mY, , &mCtrl
     if (mCtrl == "Button1") {
         if TryTriggerDropDown(false)
