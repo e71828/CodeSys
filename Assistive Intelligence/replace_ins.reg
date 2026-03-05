@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=hex:00,00,00,00,00,00,00,00,\
+03,00,00,00,\
+1C,00,52,E0,\
+00,00,00,00
+; ref: https://www.autohotkey.com/board/topic/8359-problem-remapping-key-in-cygwin-and-putty/#entry52760
+; replace Insert with Enter
+; author: e71828

@@ -1,0 +1,32 @@
+[
+        {
+                "Name": "Export",
+                "Desc": "Export codesys folder and files",
+                "Icon": "ExtractTo.ico",
+                "Path": "C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\export.py"
+        },
+        {
+                "Name": "Load",
+                "Desc": "Load files from last exported",
+                "Icon": "Add.ico",
+                "Path": "C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\load.py"
+        },
+        {
+                "Name": "Module_Detect",
+                "Desc": "module detection",
+                "Icon": "View.ico",
+                "Path": "C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\advanced\\module_detection.py"
+        },
+        {
+                "Name": "Burn&Login",
+                "Desc": "burn after save as",
+                "Icon": "Wizard.ico",
+                "Path":"C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\advanced\\Burn&Login.py"
+        },
+        {
+                "Name": "Overwrite",
+                "Desc": "rewrite selected file",
+                "Icon": "Protect.ico",
+                "Path":"C:\\Users\\13ANH\\OneDrive\\13ANH\\PycharmProjects\\CodeSys\\advanced\\overwrite.py"
+        }
+]

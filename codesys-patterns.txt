@@ -1,0 +1,9 @@
+(?d)*.opt
+(?d)*.compileinfo
+(?d)*.bootinfo_guids
+(?d)*.bootinfo
+(?d)*.~u
+(?d)*.precompilecache
+
+// exclude all Office tmp files
+~$*  
