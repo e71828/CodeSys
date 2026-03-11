@@ -9,9 +9,9 @@ AutoPasswrod()
 {
     static is_waiting := false
     ; 检查 "Encryption Password" 和 "CODESYS.exe" 窗口是否存在
-    if WinExist("密码 ahk_exe CODESYS.exe") and !is_waiting {
+    if WinActive("密码 ahk_exe CODESYS.exe") and !is_waiting {
         is_waiting := True
-        WinActive("密码")
+        WinWaitActive()
         ; 使用单行 try，不改变后续逻辑的缩进
         try text := ControlGetText("输入") ; 输入"ZAT4000VS863-1_5040_V01_d"的密码:
         catch {

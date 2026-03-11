@@ -9,9 +9,9 @@ AutoPasswrod()
 {
     static is_waiting := false
     ; 检查 "Encryption Password" 和 "CODESYS.exe" 窗口是否存在
-    if WinExist("Encryption Password ahk_exe CODESYS.exe") and !is_waiting {
+    if WinActive("Encryption Password ahk_exe CODESYS.exe") and !is_waiting {
         is_waiting := True
-        WinActive("Encryption Password")
+        WinWaitActive()
         ; 使用单行 try，不改变后续逻辑的缩进
         try text := ControlGetText("Enter the password")
         catch {
